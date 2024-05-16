@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f81c4f5-99c2-4636-be1d-e62281289fac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/test/TokenizerTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/test/TokenizerTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +35,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.TokenizerTest.executor": "Run",
     "JUnit.TokenizerTest.expectTokenizerExceptionsTests.executor": "Run",
     "JUnit.TokenizerTest.shouldReturnCorrectResult (1).executor": "Run",
     "JUnit.TokenizerTest.shouldReturnCorrectResult.executor": "Run",
@@ -140,7 +141,7 @@
       <updated>1715777380057</updated>
       <workItem from="1715777381150" duration="803000" />
       <workItem from="1715795406773" duration="9899000" />
-      <workItem from="1715858418948" duration="17352000" />
+      <workItem from="1715858418948" duration="18383000" />
     </task>
     <servers />
   </component>
