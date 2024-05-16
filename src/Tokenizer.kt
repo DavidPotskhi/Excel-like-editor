@@ -1,18 +1,15 @@
-
-
-
 abstract class Token
 
 data class NumberToken(val value: Int) : Token()
 class OpenBracket : Token()
 class CloseBracket : Token()
-data class Function(val name: String) : Token()
+data class FunctionToken(val name: String) : Token()
 data class CellReference(val cellReference: String) : Token()
 class QuoteToken : Token()
 data class BinOperand(val operand: String) : Token()
 
 
-class PeekingIterator(private val iterator: CharIterator){
+class PeekingIterator(private val iterator: CharIterator) {
     private var hasNextPeeked: Boolean = false
     private var peekedElement: Char? = null
 
@@ -30,7 +27,7 @@ class PeekingIterator(private val iterator: CharIterator){
         return result!!
     }
 
-    fun peek() : Char {
+    fun peek(): Char {
         if (!hasNextPeeked) {
             hasNextPeeked = true
             peekedElement = iterator.next()
@@ -38,8 +35,6 @@ class PeekingIterator(private val iterator: CharIterator){
         return peekedElement!!
     }
 }
-
-
 
 
 class Tokenizer(private var inputFormula: String) {
@@ -51,32 +46,87 @@ class Tokenizer(private var inputFormula: String) {
         this.currentToken = next()
     }
 
-    fun isEnd() : Boolean {
+    fun isEnd(): Boolean {
         return !iterator.hasNext()
     }
 
-    fun next() : Token? {
+    fun next(): Token? {
         if (!iterator.hasNext()) {
             return null;
         }
 
         while (iterator.hasNext() && (iterator.peek().isWhitespace() || iterator.peek() == '\n'
-                    || iterator.peek() == '\t' || iterator.peek() == '\r')) {
+                    || iterator.peek() == '\t' || iterator.peek() == '\r')
+        ) {
             iterator.next();
         }
 
-        when (iterator.peek()) {
-            //else -> throw
+        when {
+            iterator.peek() == '(' -> {
+                currentToken = OpenBracket()
+                iterator.next()
+            }
+
+            iterator.peek() == ')' -> {
+                currentToken = CloseBracket()
+                iterator.next()
+            }
+
+            iterator.peek() == ',' -> {
+                currentToken = QuoteToken()
+                iterator.next()
+            }
+
+            iterator.peek() == '+' || iterator.peek() == '-' || iterator.peek() == '*' -> {
+                currentToken = BinOperand(
+                    iterator.next().toString()
+                )
+            }
+
+            iterator.peek().isDigit() -> {
+                var integer: String = ""
+                while (iterator.hasNext() && iterator.peek().isDigit()) {
+                    integer += iterator.next()
+                }
+                val result: Int = integer.toInt()
+                currentToken = NumberToken(result)
+            }
+
+            iterator.peek().isLetter() -> {
+                var result: String = iterator.next().toString()
+                if (!iterator.hasNext()) {
+                    currentToken = FunctionToken(result)
+                } else {
+                    when {
+                        iterator.peek().isDigit() -> {
+                            while (iterator.hasNext() && iterator.peek().isDigit()) {
+                                result += iterator.next()
+                            }
+                            currentToken = CellReference(result)
+                        }
+
+                        iterator.peek().isLetter() -> {
+                            while (iterator.hasNext() && iterator.peek().isLetter()) {
+                                result += iterator.next()
+                            }
+                            currentToken = FunctionToken(result)
+                        }
+                    }
+                }
+            }
+
+            else -> throw TokenizerException("Tokenizer didn't find an acceptable token, token can't start with:" + iterator.peek())
         }
 
         while (iterator.hasNext() && (iterator.peek().isWhitespace() || iterator.peek() == '\n'
-                    || iterator.peek() == '\t' || iterator.peek() == '\r')) {
+                    || iterator.peek() == '\t' || iterator.peek() == '\r')
+        ) {
             iterator.next();
         }
         return currentToken;
     }
 
-    fun getToken() : Token? {
+    fun getToken(): Token? {
         return currentToken
     }
 }
