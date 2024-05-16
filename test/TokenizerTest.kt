@@ -101,6 +101,13 @@ class TokenizerTest {
 
     @Test
     fun expectTokenizerExceptionsTests() {
-
+        val input1 = "A2?A3"
+        org.junit.jupiter.api.assertThrows<TokenizerException> { Tokenizer(input1).tokenize() }
+        val input2 = "pow(  %   )"
+        org.junit.jupiter.api.assertThrows<TokenizerException> { Tokenizer(input2).tokenize() }
+        val input3 = "$"
+        org.junit.jupiter.api.assertThrows<TokenizerException> { Tokenizer(input3).tokenize() }
+        val input4 = "Func$"
+        org.junit.jupiter.api.assertThrows<TokenizerException> { Tokenizer(input4).tokenize() }
     }
 }

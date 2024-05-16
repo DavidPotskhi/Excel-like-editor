@@ -5,10 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f81c4f5-99c2-4636-be1d-e62281289fac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Excel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Excel.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tokenizer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tokenizer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/TokenizerTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/test/TokenizerTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,6 +35,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.TokenizerTest.expectTokenizerExceptionsTests.executor": "Run",
     "JUnit.TokenizerTest.shouldReturnCorrectResult (1).executor": "Run",
     "JUnit.TokenizerTest.shouldReturnCorrectResult.executor": "Run",
     "JUnit.TokenizerTest.simpleTest.executor": "Run",
@@ -69,7 +66,26 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TokenizerTest.shouldReturnCorrectResult (1)">
+  <component name="RunManager" selected="JUnit.TokenizerTest">
+    <configuration name="TokenizerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Excel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TokenizerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TokenizerTest.expectTokenizerExceptionsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Excel" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TokenizerTest" />
+      <option name="METHOD_NAME" value="expectTokenizerExceptionsTests" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TokenizerTest.shouldReturnCorrectResult (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Excel" />
       <option name="PACKAGE_NAME" value="" />
@@ -90,16 +106,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TokenizerTest.simpleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Excel" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TokenizerTest" />
-      <option name="METHOD_NAME" value="simpleTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="Excel" />
@@ -109,10 +115,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TokenizerTest" />
+        <item itemvalue="JUnit.TokenizerTest.expectTokenizerExceptionsTests" />
         <item itemvalue="JUnit.TokenizerTest.shouldReturnCorrectResult (1)" />
         <item itemvalue="Kotlin.MainKt" />
         <item itemvalue="JUnit.TokenizerTest.shouldReturnCorrectResult" />
-        <item itemvalue="JUnit.TokenizerTest.simpleTest" />
       </list>
     </recent_temporary>
   </component>
@@ -133,7 +140,7 @@
       <updated>1715777380057</updated>
       <workItem from="1715777381150" duration="803000" />
       <workItem from="1715795406773" duration="9899000" />
-      <workItem from="1715858418948" duration="17039000" />
+      <workItem from="1715858418948" duration="17352000" />
     </task>
     <servers />
   </component>
@@ -162,20 +169,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-function">
-          <url>file://$PROJECT_DIR$/test/TokenizerTest.kt</url>
-          <line>21</line>
-          <properties class="TokenizerTest" method="shouldReturnCorrectResult">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
