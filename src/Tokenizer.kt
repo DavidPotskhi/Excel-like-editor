@@ -1,12 +1,12 @@
-abstract class Token
+interface Token
 
-data class NumberToken(val value: Int) : Token()
-class OpenBracket : Token()
-class CloseBracket : Token()
-data class FunctionToken(val name: String) : Token()
-data class CellReference(val cellReference: String) : Token()
-class QuoteToken : Token()
-data class BinOperand(val operand: String) : Token()
+data class NumberToken(val value: Int) : Token
+object OpenBracketToken : Token
+object CloseBracketToken : Token
+data class FunctionToken(val name: String) : Token
+data class CellReferenceToken(val cellRef: String) : Token
+object QuoteToken : Token
+data class BinOperandToken(val operand: String) : Token
 
 
 class PeekingIterator(private val iterator: CharIterator) {
@@ -40,17 +40,17 @@ class PeekingIterator(private val iterator: CharIterator) {
 class Tokenizer(private var inputFormula: String) {
 
     private var iterator: PeekingIterator = PeekingIterator(this.inputFormula.iterator())
-    private var currentToken: Token?
+    private var currentToken: Token? = null
 
     init {
         this.currentToken = next()
     }
 
-    fun isEnd(): Boolean {
+    private fun isEnd(): Boolean {
         return !iterator.hasNext()
     }
 
-    fun next(): Token? {
+    private fun next(): Token? {
         if (!iterator.hasNext()) {
             return null;
         }
@@ -63,22 +63,22 @@ class Tokenizer(private var inputFormula: String) {
 
         when {
             iterator.peek() == '(' -> {
-                currentToken = OpenBracket()
+                currentToken = OpenBracketToken
                 iterator.next()
             }
 
             iterator.peek() == ')' -> {
-                currentToken = CloseBracket()
+                currentToken = CloseBracketToken
                 iterator.next()
             }
 
             iterator.peek() == ',' -> {
-                currentToken = QuoteToken()
+                currentToken = QuoteToken
                 iterator.next()
             }
 
             iterator.peek() == '+' || iterator.peek() == '-' || iterator.peek() == '*' -> {
-                currentToken = BinOperand(
+                currentToken = BinOperandToken(
                     iterator.next().toString()
                 )
             }
@@ -102,13 +102,17 @@ class Tokenizer(private var inputFormula: String) {
                             while (iterator.hasNext() && iterator.peek().isDigit()) {
                                 result += iterator.next()
                             }
-                            currentToken = CellReference(result)
+                            currentToken = CellReferenceToken(result)
                         }
 
                         iterator.peek().isLetter() -> {
                             while (iterator.hasNext() && iterator.peek().isLetter()) {
                                 result += iterator.next()
                             }
+                            currentToken = FunctionToken(result)
+                        }
+
+                        else -> {
                             currentToken = FunctionToken(result)
                         }
                     }
@@ -126,7 +130,17 @@ class Tokenizer(private var inputFormula: String) {
         return currentToken;
     }
 
-    fun getToken(): Token? {
+    private fun getToken(): Token? {
         return currentToken
+    }
+
+    fun tokenize(): List<Token> {
+        val result: MutableList<Token> = mutableListOf<Token>()
+        while (!isEnd()) {
+            result.add(getToken()!!)
+            next()
+        }
+        if (getToken() != null) result.add(getToken()!!)
+        return result
     }
 }
