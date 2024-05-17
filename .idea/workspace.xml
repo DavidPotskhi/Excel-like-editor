@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f81c4f5-99c2-4636-be1d-e62281289fac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Entity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Environment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GlobalEnvironment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyExceptions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyExceptions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Environment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Environment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
+        <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -152,7 +152,7 @@
       <workItem from="1715795406773" duration="9899000" />
       <workItem from="1715858418948" duration="18383000" />
       <workItem from="1715890222124" duration="2683000" />
-      <workItem from="1715947026090" duration="3088000" />
+      <workItem from="1715947026090" duration="4731000" />
     </task>
     <servers />
   </component>
