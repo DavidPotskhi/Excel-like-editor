@@ -1,3 +1,4 @@
+/*
 class GlobalEnvironment : Environment {
 
     val bindings = hashMapOf<String, (MutableList<Entity>, Int) -> Entity>()
@@ -14,3 +15,5 @@ class GlobalEnvironment : Environment {
         TODO("Not yet implemented")
     }
 }
+
+ */

@@ -6,6 +6,7 @@ interface Entity {
 }
 
 /*
+/*
 class Environment : Entity {
     override fun eval(env: Environment): Entity {
         TODO("Not yet implemented")
@@ -50,3 +51,5 @@ class Function(val function: (MutableList<Entity>, Int) -> Entity) : Entity {
 
 
 }
+
+ */
