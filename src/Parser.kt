@@ -63,11 +63,10 @@ class Parser(val tokenList: List<Token>) {
     }
 
     fun expressionRead() {
-        if (!it.hasNext()) throw ParserException("Expression can't be empty")
 
         // TODO("Stack logic, put the open bracket on the stack")
 
-        currentToken = it.next()
+        acceptToken()
 
         if (returnTokens.contains(currentToken)) throw ParserException("Expression can't start with $currentToken")
 
@@ -84,9 +83,8 @@ class Parser(val tokenList: List<Token>) {
 
         // TODO("Stack logic, put the open bracket on the stack")
 
-        //if (!it.hasNext()) return
+        acceptToken()
 
-        currentToken = it.next()
         if (returnTokens.contains(currentToken)) return
         // TODO("STACK LOGIC")
         expect(listOf(BinOperandToken("+"), BinOperandToken("-"), BinOperandToken("*")))
