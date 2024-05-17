@@ -6,35 +6,32 @@ class Parser(val tokenList: List<Token>) {
     var currentToken: Token? = null
     val returnTokens = listOf(CloseBracketToken, QuoteToken)
 
-    private fun checkIfReturn(): Boolean {
-        return returnTokens.contains(currentToken) || !it.hasNext()
-    }
 
-    private fun throwIfEndOfTokenStream(token: Token?) {
+
+    private fun throwIfEndOfTokenStream() {
         if (!it.hasNext()) {
-            throw ParserException(("Parser expected next token after" + token?.toString()))
+            throw ParserException(("Parser expected next token after" + currentToken?.toString()))
         }
     }
 
     private fun expect(toExpect: List<Token>) {
-        throwIfEndOfTokenStream(currentToken)
         if (!toExpect.contains(currentToken)) {
             throw ParserException("Expected $toExpect token but got $currentToken")
         }
     }
 
     private fun functionRead() {
-        throwIfEndOfTokenStream(currentToken)
+        throwIfEndOfTokenStream()
         currentToken = it.next()
-        throwIfEndOfTokenStream(currentToken)
+        expect(listOf(OpenBracketToken))
+        throwIfEndOfTokenStream()
         currentToken = it.next()
         if (currentToken == CloseBracketToken) {
             // TODO("STACK LOGIC")
             return
         } else {
-            currentToken = it.previous()
+            it.previous()
         }
-        expect(listOf(OpenBracketToken))
         while (currentToken != CloseBracketToken) {
             expressionRead()
             expect(listOf(CloseBracketToken, QuoteToken))
@@ -44,7 +41,6 @@ class Parser(val tokenList: List<Token>) {
     }
 
     private fun openBracketRead() {
-        throwIfEndOfTokenStream(currentToken)
         expressionRead()
         expect(listOf(CloseBracketToken))
     }
@@ -62,7 +58,7 @@ class Parser(val tokenList: List<Token>) {
             throw ParserException("Parser expects unary minus, not $currentToken")
         }
         // TODO("Stack logic")
-        throwIfEndOfTokenStream(currentToken)
+        throwIfEndOfTokenStream()
         currentToken = it.next()
     }
 
@@ -73,7 +69,7 @@ class Parser(val tokenList: List<Token>) {
 
         currentToken = it.next()
 
-        if (checkIfReturn()) throw ParserException("Expression can't start with $currentToken")
+        if (returnTokens.contains(currentToken)) throw ParserException("Expression can't start with $currentToken")
 
 
         if (currentToken is BinOperandToken) firstBinOperandRead()
@@ -88,12 +84,12 @@ class Parser(val tokenList: List<Token>) {
 
         // TODO("Stack logic, put the open bracket on the stack")
 
-        if (checkIfReturn()) return
+        if (!it.hasNext()) return
 
         currentToken = it.next()
+        if (returnTokens.contains(currentToken)) return
         // TODO("STACK LOGIC")
         expect(listOf(BinOperandToken("+"), BinOperandToken("-"), BinOperandToken("*")))
-        throwIfEndOfTokenStream(currentToken)
         expressionRead()
     }
 
