@@ -5,8 +5,10 @@ object OpenBracketToken : Token
 object CloseBracketToken : Token
 data class FunctionToken(val name: String) : Token
 data class CellReferenceToken(val cellRef: String) : Token
-object QuoteToken : Token
+object CommaToken : Token
 data class BinOperandToken(val operand: String) : Token
+
+object EofToken : Token
 
 
 class PeekingIterator(private val iterator: CharIterator) {
@@ -73,7 +75,7 @@ class Tokenizer(private var inputFormula: String) {
             }
 
             iterator.peek() == ',' -> {
-                currentToken = QuoteToken
+                currentToken = CommaToken
                 iterator.next()
             }
 
@@ -141,6 +143,7 @@ class Tokenizer(private var inputFormula: String) {
             next()
         }
         if (getToken() != null) result.add(getToken()!!)
+        result.add(EofToken)
         return result
     }
 }

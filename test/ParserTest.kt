@@ -58,8 +58,9 @@ class ParserTest {
                 Arguments.of("((((42))))"),
                 Arguments.of("((((0 -- func(1,2,3,4,5)))))"),
                 Arguments.of("pow(2 - 3)"),
+                Arguments.of("pow(2, - 3)"),
 
-
+                Arguments.of("pow(f(f(f(f(42)))), - 3)"),
 
             )
         }

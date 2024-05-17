@@ -1,4 +1,3 @@
-import com.sun.jdi.connect.Connector.Argument
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -20,7 +19,7 @@ class TokenizerTest {
     @ParameterizedTest
     @MethodSource("testCases")
     fun shouldReturnCorrectResult(input: String, tokenList: List<Token>) {
-        assertEquals(tokenList, Tokenizer(input).tokenize())
+        assertEquals(tokenList + EofToken, Tokenizer(input).tokenize())
     }
 
     companion object {
@@ -34,7 +33,7 @@ class TokenizerTest {
                 Arguments.of(" 5  ", listOf(NumberToken(5))),
                 Arguments.of("12345", listOf(NumberToken(12345))),
                 Arguments.of("  Func ", listOf(FunctionToken("Func"))),
-                Arguments.of("  ,", listOf(QuoteToken)),
+                Arguments.of("  ,", listOf(CommaToken)),
                 Arguments.of(
                     "()+-",
                     listOf(OpenBracketToken, CloseBracketToken, BinOperandToken("+"), BinOperandToken("-"))
@@ -64,7 +63,7 @@ class TokenizerTest {
                         FunctionToken("pow"),
                         OpenBracketToken,
                         NumberToken(1),
-                        QuoteToken,
+                        CommaToken,
                         FunctionToken("f"),
                         OpenBracketToken,
                         CloseBracketToken,

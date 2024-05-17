@@ -1,17 +1,20 @@
 class Parser(val tokenList: List<Token>) {
 
-    val it: ListIterator<Token> = tokenList.listIterator()
+    private val it: ListIterator<Token> = tokenList.listIterator()
     val holdingStack: MutableList<Entity> = mutableListOf()
     val outputStack: MutableList<Entity> = mutableListOf()
-    var currentToken: Token? = null
-    val returnTokens = listOf(CloseBracketToken, QuoteToken)
+    private lateinit var currentToken: Token
+    private val returnTokens = listOf(CloseBracketToken, CommaToken, EofToken)
 
 
 
-    private fun throwIfEndOfTokenStream() {
+
+
+    private fun acceptToken() {
         if (!it.hasNext()) {
             throw ParserException(("Parser expected next token after" + currentToken?.toString()))
         }
+        currentToken = it.next()
     }
 
     private fun expect(toExpect: List<Token>) {
@@ -21,11 +24,9 @@ class Parser(val tokenList: List<Token>) {
     }
 
     private fun functionRead() {
-        throwIfEndOfTokenStream()
-        currentToken = it.next()
+        acceptToken()
         expect(listOf(OpenBracketToken))
-        throwIfEndOfTokenStream()
-        currentToken = it.next()
+        acceptToken()
         if (currentToken == CloseBracketToken) {
             // TODO("STACK LOGIC")
             return
@@ -34,7 +35,7 @@ class Parser(val tokenList: List<Token>) {
         }
         while (currentToken != CloseBracketToken) {
             expressionRead()
-            expect(listOf(CloseBracketToken, QuoteToken))
+            expect(listOf(CloseBracketToken, CommaToken))
             // TODO("stack logic")
         }
         // TODO("Stack logic")
@@ -58,8 +59,7 @@ class Parser(val tokenList: List<Token>) {
             throw ParserException("Parser expects unary minus, not $currentToken")
         }
         // TODO("Stack logic")
-        throwIfEndOfTokenStream()
-        currentToken = it.next()
+        acceptToken()
     }
 
     fun expressionRead() {
@@ -84,7 +84,7 @@ class Parser(val tokenList: List<Token>) {
 
         // TODO("Stack logic, put the open bracket on the stack")
 
-        if (!it.hasNext()) return
+        //if (!it.hasNext()) return
 
         currentToken = it.next()
         if (returnTokens.contains(currentToken)) return
