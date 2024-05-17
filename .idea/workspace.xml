@@ -80,7 +80,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ParserTest">
+  <component name="RunManager" selected="JUnit.TokenizerTest">
     <configuration name="ParserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Excel" />
       <option name="PACKAGE_NAME" value="" />
@@ -128,8 +128,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ParserTest" />
         <item itemvalue="JUnit.TokenizerTest" />
+        <item itemvalue="JUnit.ParserTest" />
         <item itemvalue="JUnit.ParserTest.shouldThrowParserException" />
         <item itemvalue="JUnit.ParserTest.shouldNotThrowParserException" />
         <item itemvalue="Kotlin.MainKt" />
@@ -155,7 +155,7 @@
       <workItem from="1715795406773" duration="9899000" />
       <workItem from="1715858418948" duration="18383000" />
       <workItem from="1715890222124" duration="2683000" />
-      <workItem from="1715947026090" duration="24310000" />
+      <workItem from="1715947026090" duration="24969000" />
     </task>
     <servers />
   </component>

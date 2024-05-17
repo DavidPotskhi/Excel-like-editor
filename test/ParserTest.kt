@@ -28,6 +28,7 @@ class ParserTest {
         @JvmStatic
         fun testCasesForExceptions(): Stream<Arguments> {
             return Stream.of(
+                Arguments.of("*1"),
                 Arguments.of("1 + "),
                 Arguments.of("(1 + )"),
                 Arguments.of("((((1 + 2)"),

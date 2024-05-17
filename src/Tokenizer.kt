@@ -6,7 +6,14 @@ object CloseBracketToken : Token
 data class FunctionToken(val name: String) : Token
 data class CellReferenceToken(val cellRef: String) : Token
 object CommaToken : Token
-data class BinOperandToken(val operand: String) : Token
+data class BinOperandToken(val operand: String) : Token {
+    companion object {
+        val MINUS = BinOperandToken("-")
+        val PLUS = BinOperandToken("+")
+        val MULTIPLY = BinOperandToken("*")
+        val ALL = listOf(MINUS, PLUS, MULTIPLY)
+    }
+}
 
 object EofToken : Token
 

@@ -55,7 +55,7 @@ class Parser(val tokenList: List<Token>) {
     }
 
     private fun firstBinOperandRead() {
-        if (currentToken != BinOperandToken("-")) {
+        if (currentToken != BinOperandToken.MINUS) {
             throw ParserException("Parser expects unary minus, not $currentToken")
         }
         // TODO("Stack logic")
@@ -87,7 +87,7 @@ class Parser(val tokenList: List<Token>) {
 
         if (returnTokens.contains(currentToken)) return
         // TODO("STACK LOGIC")
-        expect(listOf(BinOperandToken("+"), BinOperandToken("-"), BinOperandToken("*")))
+        expect(BinOperandToken.ALL)
         expressionRead()
     }
 

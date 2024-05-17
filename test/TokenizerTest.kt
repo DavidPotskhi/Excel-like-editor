@@ -27,23 +27,23 @@ class TokenizerTest {
         fun testCases(): Stream<Arguments> {
             return Stream.of(
                 Arguments.of("(", listOf(OpenBracketToken)),
-                Arguments.of("-", listOf(BinOperandToken("-"))),
+                Arguments.of("-", listOf(BinOperandToken.MINUS)),
                 Arguments.of("   (  ", listOf(OpenBracketToken)),
-                Arguments.of("+  ", listOf(BinOperandToken("+"))),
+                Arguments.of("+  ", listOf(BinOperandToken.PLUS)),
                 Arguments.of(" 5  ", listOf(NumberToken(5))),
                 Arguments.of("12345", listOf(NumberToken(12345))),
                 Arguments.of("  Func ", listOf(FunctionToken("Func"))),
                 Arguments.of("  ,", listOf(CommaToken)),
                 Arguments.of(
                     "()+-",
-                    listOf(OpenBracketToken, CloseBracketToken, BinOperandToken("+"), BinOperandToken("-"))
+                    listOf(OpenBracketToken, CloseBracketToken, BinOperandToken.PLUS, BinOperandToken.MINUS)
                 ),
                 Arguments.of(
                     "(A2+A1)",
                     listOf(
                         OpenBracketToken,
                         CellReferenceToken("A2"),
-                        BinOperandToken("+"),
+                        BinOperandToken.PLUS,
                         CellReferenceToken("A1"),
                         CloseBracketToken
                     )
@@ -53,7 +53,7 @@ class TokenizerTest {
                     listOf(
                         OpenBracketToken,
                         CellReferenceToken("A2000"),
-                        BinOperandToken("+"),
+                        BinOperandToken.PLUS,
                         CellReferenceToken("A1"),
                         CloseBracketToken
                     )
@@ -68,7 +68,7 @@ class TokenizerTest {
                         OpenBracketToken,
                         CloseBracketToken,
                         CloseBracketToken,
-                        BinOperandToken("+"),
+                        BinOperandToken.PLUS,
                         CellReferenceToken("B100")
                     )
                 ),
@@ -76,7 +76,7 @@ class TokenizerTest {
                     "(1 + 2 * P1) * exp(sq(X1) * 5)", listOf(
                         OpenBracketToken,
                         NumberToken(1),
-                        BinOperandToken("+"),
+                        BinOperandToken.PLUS,
                         NumberToken(2),
                         BinOperandToken("*"),
                         CellReferenceToken("P1"),
