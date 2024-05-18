@@ -1,8 +1,8 @@
-class Parser(val tokenList: List<Token>) {
+
+class Parser(private val tokenList: List<Token>) {
 
     private val it: ListIterator<Token> = tokenList.listIterator()
-    val holdingStack: MutableList<Entity> = mutableListOf()
-    val outputStack: MutableList<Entity> = mutableListOf()
+    val instructionGenerator: InstructionGenerator = InstructionGenerator()
     private lateinit var currentToken: Token
     private val returnTokens = listOf(CloseBracketToken, CommaToken, EofToken)
 
@@ -12,7 +12,7 @@ class Parser(val tokenList: List<Token>) {
 
     private fun acceptToken() {
         if (!it.hasNext()) {
-            throw ParserException(("Parser expected next token after" + currentToken?.toString()))
+            throw ParserException(("Parser expected next token after $currentToken"))
         }
         currentToken = it.next()
     }
@@ -24,52 +24,52 @@ class Parser(val tokenList: List<Token>) {
     }
 
     private fun functionRead() {
+        val functionToken: FunctionToken = currentToken as FunctionToken
         acceptToken()
         expect(listOf(OpenBracketToken))
         acceptToken()
-        if (currentToken == CloseBracketToken) {
-            // TODO("STACK LOGIC")
-            return
-        } else {
+        if (currentToken != CloseBracketToken) {
             it.previous()
+            while (currentToken != CloseBracketToken) {
+                instructionGenerator.addToken(OpenBracketToken)
+                expressionRead()
+                instructionGenerator.addToken(CloseBracketToken)
+                expect(listOf(CloseBracketToken, CommaToken))
+            }
         }
-        while (currentToken != CloseBracketToken) {
-            expressionRead()
-            expect(listOf(CloseBracketToken, CommaToken))
-            // TODO("stack logic")
-        }
-        // TODO("Stack logic")
+        instructionGenerator.addToken(functionToken)
     }
 
     private fun openBracketRead() {
+        instructionGenerator.addToken(currentToken) // adding OpenBracket
         expressionRead()
         expect(listOf(CloseBracketToken))
+        instructionGenerator.addToken(currentToken) // adding CloseBracket
     }
 
     private fun cellReferenceRead() {
-        // TODO("STACK LOGIC")
+        instructionGenerator.addToken(currentToken)
     }
 
     private fun numberRead() {
-        // TODO("STACK LOGIC")
+        instructionGenerator.addToken(currentToken)
     }
 
     private fun firstBinOperandRead() {
         if (currentToken != BinOperandToken.MINUS) {
             throw ParserException("Parser expects unary minus, not $currentToken")
         }
-        // TODO("Stack logic")
+        instructionGenerator.addToken(NumberToken.ZERO)
+        instructionGenerator.addToken(BinOperandToken.MINUS)
         acceptToken()
     }
 
     fun expressionRead() {
 
-        // TODO("Stack logic, put the open bracket on the stack")
-
+        instructionGenerator.addToken(OpenBracketToken)
         acceptToken()
 
         if (returnTokens.contains(currentToken)) throw ParserException("Expression can't start with $currentToken")
-
 
         if (currentToken is BinOperandToken) firstBinOperandRead()
         when (currentToken) {
@@ -81,13 +81,18 @@ class Parser(val tokenList: List<Token>) {
         }
 
 
-        // TODO("Stack logic, put the open bracket on the stack")
+        instructionGenerator.addToken(CloseBracketToken)
 
         acceptToken()
 
-        if (returnTokens.contains(currentToken)) return
-        // TODO("STACK LOGIC")
+        if (returnTokens.contains(currentToken)) {
+            if (currentToken == EofToken) {
+                instructionGenerator.addToken(EofToken)
+            }
+            return
+        }
         expect(BinOperandToken.ALL)
+        instructionGenerator.addToken(currentToken) // adding BinOperandToken
         expressionRead()
     }
 

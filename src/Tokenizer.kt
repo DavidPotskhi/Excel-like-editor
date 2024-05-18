@@ -1,6 +1,10 @@
 interface Token
 
-data class NumberToken(val value: Int) : Token
+data class NumberToken(val value: Int) : Token {
+    companion object {
+        val ZERO = NumberToken(0)
+    }
+}
 object OpenBracketToken : Token
 object CloseBracketToken : Token
 data class FunctionToken(val name: String) : Token
