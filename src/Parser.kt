@@ -1,3 +1,4 @@
+import java.util.Queue
 
 class Parser(private val tokenList: List<Token>) {
 
@@ -5,9 +6,14 @@ class Parser(private val tokenList: List<Token>) {
     val instructionGenerator: InstructionGenerator = InstructionGenerator()
     private lateinit var currentToken: Token
     private val returnTokens = listOf(CloseBracketToken, CommaToken, EofToken)
+    val dependingOnCells = HashSet<String>()
 
 
 
+    fun parseAndGetInstructions(): Queue<Instruction> {
+        expressionRead()
+        return instructionGenerator.outputQueue
+    }
 
 
     private fun acceptToken() {
@@ -49,6 +55,7 @@ class Parser(private val tokenList: List<Token>) {
 
     private fun cellReferenceRead() {
         instructionGenerator.addToken(currentToken)
+        dependingOnCells.add((currentToken as CellReferenceToken).cellRef)
     }
 
     private fun numberRead() {

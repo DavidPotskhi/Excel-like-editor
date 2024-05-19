@@ -17,3 +17,10 @@ class InterpreterException : RuntimeException {
     constructor(message: String, cause: Throwable) : super(message, cause)
 
 }
+
+
+class TableException : RuntimeException {
+    constructor(message: String) : super(message)
+    constructor(message: String, cause: Throwable) : super(message, cause)
+
+}

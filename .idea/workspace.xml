@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f81c4f5-99c2-4636-be1d-e62281289fac" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Table.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpreter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpreter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Environment.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyExceptions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyExceptions.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;parser&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -157,6 +160,7 @@
       <workItem from="1716032903076" duration="2598000" />
       <workItem from="1716035889704" duration="9275000" />
       <workItem from="1716120898029" duration="1917000" />
+      <workItem from="1716132171846" duration="3083000" />
     </task>
     <servers />
   </component>
