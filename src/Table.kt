@@ -4,7 +4,7 @@ class Table {
     val cells = hashMapOf<String, Cell>()
     var outDependencies = hashMapOf<String, HashSet<String>>()
     var inDependencies = hashMapOf<String, HashSet<String>>()
-    val interpreter: Interpreter = Interpreter()
+    val interpreter: Interpreter = Interpreter(this)
 
 
     fun updateDependencies(dependings: HashSet<String>, cellRef: String) {

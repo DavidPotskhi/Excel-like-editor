@@ -1,7 +1,7 @@
 import java.util.*
 import kotlin.math.max
 
-class Interpreter {
+class Interpreter(val table: Table) {
 
     val functions = hashMapOf<String, (MutableList<Int>) -> Unit>(
         "+" to {
@@ -39,7 +39,7 @@ class Interpreter {
     fun eval(instruction: Instruction, stack: MutableList<Int>) {
         when (instruction) {
             is Number -> stack.add(instruction.number)
-            is CellReference -> {}
+            is CellReference -> stack.add(table.cells[instruction.cellReference]!!.value)
             is Function -> {
                 if (!functions.containsKey(instruction.functionName)) {
                     throw InterpreterException("Interpreter doesn't have function called: $instruction")
