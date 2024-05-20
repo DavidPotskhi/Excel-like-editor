@@ -43,76 +43,6 @@ class TableGUI {
     }
 
 
-    /*
-//    class CustomCellEditor(private val tableModel: RowHeaderTableModel, val internalTable: Table) : AbstractCellEditor(), TableCellEditor,
-//        KeyListener {
-        private val textField = JTextField()
-        private var row: Int = -1
-        private var column: Int = -1
-        private var lastRow: Int = -1
-        private var lastColumn: Int = -1
-
-        init {
-            textField.addKeyListener(this)
-        }
-
-        override fun stopCellEditing(): Boolean {
-            println("AHUET' mojno s etim ebanim swingom")
-            println(row)
-            println(column)
-            println(lastRow)
-            println(lastColumn)
-            if (row != lastRow || column != lastColumn) {
-                // Trigger action only on cell switch
-                handleCellEdit()
-            }
-            lastRow = row
-            lastColumn = column
-            return super.stopCellEditing()
-        }
-
-        private fun handleCellEdit() {
-            if (row != -1 && column != -1) {
-                val rowName = tableModel.getValueAt(row, 0).toString() // Get the row name
-                val columnName = tableModel.getColumnName(column) // Get the column name
-                println("Entered: ${textField.text} at $rowName, $columnName")
-                internalTable.modifyCell(rowName + columnName, textField.text)
-                textField.text = internalTable.cells[rowName + columnName]?.value?.toString() ?: ""
-            }
-        }
-
-        override fun getCellEditorValue(): Any {
-            return textField.text
-        }
-
-        override fun getTableCellEditorComponent(
-            table: JTable?,
-            value: Any?,
-            isSelected: Boolean,
-            row: Int,
-            column: Int
-        ): Component {
-            this.row = row
-            this.column = column
-            textField.text = value as? String
-            return textField
-        }
-
-        override fun keyPressed(e: KeyEvent?) {
-            // Not used
-        }
-
-        override fun keyReleased(e: KeyEvent?) {
-            // Not used
-        }
-
-        override fun keyTyped(e: KeyEvent?) {
-            // Not used
-        }
-    }
-
-     */
-
     class CustomCellEditor(private val tableModel: RowHeaderTableModel, val internalTable: Table) : AbstractCellEditor(), TableCellEditor, KeyListener {
         private val textField = JTextField()
         private var currentRow: Int = -1
@@ -261,55 +191,12 @@ class TableGUI {
         val scrollPane = JScrollPane(table)
         scrollPane.preferredSize = Dimension(780, 550)
 
-        // Create a menu bar
-        val menuBar = JMenuBar()
-        val fileMenu = JMenu("File")
-        val newMenuItem = JMenuItem("New")
-        val openMenuItem = JMenuItem("Open")
-        val saveMenuItem = JMenuItem("Save")
-        fileMenu.add(newMenuItem)
-        fileMenu.add(openMenuItem)
-        fileMenu.add(saveMenuItem)
-        menuBar.add(fileMenu)
-        frame.jMenuBar = menuBar
 
-        // Create a toolbar
-        val toolBar = JToolBar()
-        val newButton = JButton("New")
-        val openButton = JButton("Open")
-        val saveButton = JButton("Save")
-        toolBar.add(newButton)
-        toolBar.add(openButton)
-        toolBar.add(saveButton)
 
-        // Add toolbar and table to the frame
-        frame.add(toolBar, java.awt.BorderLayout.NORTH)
-        frame.add(scrollPane, java.awt.BorderLayout.CENTER)
 
-        // Define actions for buttons and menu items
-        val newAction = {
-            for (row in 0..<tableModel.rowCount) {
-                for (col in 1..<tableModel.columnCount + 1) { // skip the row header column
-                    tableModel.setValueAt("", row, col)
-                }
-            }
-        }
-        newButton.addActionListener { newAction() }
-        newMenuItem.addActionListener { newAction() }
 
-        openButton.addActionListener {
-            // Implement open file functionality here
-        }
-        openMenuItem.addActionListener {
-            // Implement open file functionality here
-        }
 
-        saveButton.addActionListener {
-            // Implement save file functionality here
-        }
-        saveMenuItem.addActionListener {
-            // Implement save file functionality here
-        }
+
 
         // Display the frame
         frame.pack()

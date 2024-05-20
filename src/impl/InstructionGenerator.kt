@@ -1,9 +1,13 @@
-import java.util.*
+package impl
+import interfaces.InstructionGenerator
 import interfaces.ParserException
+import java.util.*
+import interfaces.Token
+import interfaces.Instruction
 
-class InstructionGenerator {
-    val holdingStack: MutableList<Instruction> = mutableListOf<Instruction>()
-    val outputQueue: Queue<Instruction> = LinkedList<Instruction>()
+class InstructionGenerator() :  InstructionGenerator {
+    private val holdingStack: MutableList<Instruction> = mutableListOf<Instruction>()
+    override val outputQueue: Queue<Instruction> = LinkedList<Instruction>()
 
 
     companion object {
@@ -40,7 +44,7 @@ class InstructionGenerator {
         while (holdingStack.isNotEmpty()) outputQueue.add(holdingStack.removeLast())
     }
 
-    fun addToken(token: Token) {
+    override fun addToken(token: Token) {
         when (token) {
             is NumberToken -> outputQueue.add(Number(token.value))
             is CellReferenceToken -> outputQueue.add(CellReference(token.cellRef))

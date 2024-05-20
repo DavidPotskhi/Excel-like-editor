@@ -1,9 +1,17 @@
+package impl
+import interfaces.Table
 import interfaces.TableException
+import TableGUI
+import interfaces.ParserFactory
 
-class Table(val tableGUI: TableGUI) {
-    data class Cell(var formula: String = "", var value: Int = 0)
+class Table(
+    val tableGUI: TableGUI,
+    val tokenizerFactory: TokenizerFactory,
+    val parserFactory: ParserFactory
+) :  Table {
+    data class Cell(override var formula: String = "", override var value: Int = 0): Table.Cell
 
-    val cells = hashMapOf<String, Cell>()
+    override val cells: HashMap<String, Table.Cell> = hashMapOf()
     var outDependencies = hashMapOf<String, HashSet<String>>()
     var inDependencies = hashMapOf<String, HashSet<String>>()
     val interpreter: Interpreter = Interpreter(this)
@@ -13,7 +21,7 @@ class Table(val tableGUI: TableGUI) {
         return this[key]!!
     }
 
-    fun  HashMap<String, Cell>.getOrCreate(key: String): Cell {
+    fun  HashMap<String, Table.Cell>.getOrCreate(key: String): Table.Cell {
         this.getOrPut(key) { Cell() }
         return this[key]!!
     }
@@ -38,20 +46,20 @@ class Table(val tableGUI: TableGUI) {
 //        try {
 //
 
-            if (!cells.containsKey(cellRef)) {
-                return
+        if (!cells.containsKey(cellRef)) {
+            return
+        }
+        if (outDependencies.getOrCreate(cellRef).isNotEmpty()) {
+            var dependings = ""
+            for (cell in outDependencies.getOrCreate(cellRef)) {
+                dependings += "$cell, "
             }
-            if (outDependencies.getOrCreate(cellRef).isNotEmpty()) {
-                var dependings = ""
-                for (cell in outDependencies.getOrCreate(cellRef)) {
-                    dependings += "$cell, "
-                }
-                throw TableException("$cellRef can't become empty since $dependings depend on its value")
-            }
-            for (cell in inDependencies.getOrCreate(cellRef)) {
-                outDependencies.getOrCreate(cell).remove(cellRef)
-            }
-            cells.remove(cellRef)
+            throw TableException("$cellRef can't become empty since $dependings depend on its value")
+        }
+        for (cell in inDependencies.getOrCreate(cellRef)) {
+            outDependencies.getOrCreate(cell).remove(cellRef)
+        }
+        cells.remove(cellRef)
 //        } catch (e: RuntimeException) {
 //            println(e.javaClass.toString().substring(6) + ":  " + e.message)
 //        }
@@ -94,14 +102,14 @@ class Table(val tableGUI: TableGUI) {
         val isCycle: Boolean = dfs(cellRef, topologicalOrder, visited)
         if (isCycle) {
             clearDependencies(cellRef)
-            val parser = Parser(Tokenizer(cells.getOrCreate(cellRef).formula).tokenize())
+            val parser = parserFactory.create(tokenizerFactory.create(cells.getOrCreate(cellRef).formula).tokenize())
             parser.expressionRead()
             updateDependencies(parser.dependingOnCells, cellRef)
             println("Cycle detected: $cellRef")
         } else {
             cells.getOrCreate(cellRef).formula = formula
             for (cell in topologicalOrder.reversed()) {
-                val parser = Parser(Tokenizer(cells.getOrCreate(cell).formula).tokenize())
+                val parser = parserFactory.create(tokenizerFactory.create(cells.getOrCreate(cell).formula).tokenize())
                 val instructions = parser.parseAndGetInstructions()
                 cells.getOrCreate(cell).value = interpreter.executeInstructions(instructions)
                 println("Updating $cell as dep of $cellRef to ${cells.getOrCreate(cell).value}")
@@ -112,17 +120,17 @@ class Table(val tableGUI: TableGUI) {
 
     fun modifyCellWithNonEmptyFormula(cellRef: String, formula: String) {
 //        try {
-            val parser = Parser(Tokenizer(formula).tokenize())
-            parser.expressionRead()
-            Interpreter(this).executeInstructions(parser.instructionGenerator.outputQueue)
-            updateDependencies(parser.dependingOnCells, cellRef)
-            makeTopologicalTraversal(cellRef, formula)
+        val parser = parserFactory.create(tokenizerFactory.create(formula).tokenize())
+        parser.expressionRead()
+        Interpreter(this).executeInstructions(parser.instructionGenerator.outputQueue)
+        updateDependencies(parser.dependingOnCells, cellRef)
+        makeTopologicalTraversal(cellRef, formula)
 //        } catch (e: RuntimeException) {
 //            println(e.javaClass.toString().substring(6) + ":  " + e.message)
 //        }
     }
 
-    fun modifyCell(cellRef: String, formula: String) {
+    override fun modifyCell(cellRef: String, formula: String) {
         when {
             formula.isEmpty() -> makeCellEmpty(cellRef)
             else -> modifyCellWithNonEmptyFormula(cellRef, formula)

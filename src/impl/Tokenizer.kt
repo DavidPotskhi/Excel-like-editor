@@ -1,6 +1,9 @@
+package impl
+import interfaces.Tokenizer
+import interfaces.Token
 import interfaces.TokenizerException
+import interfaces.TokenizerFactory
 
-interface Token
 
 data class NumberToken(val value: Int) : Token {
     companion object {
@@ -22,7 +25,6 @@ data class BinOperandToken(val operand: String) : Token {
 }
 
 object EofToken : Token
-
 
 class PeekingIterator(private val iterator: CharIterator) {
     private var hasNextPeeked: Boolean = false
@@ -52,8 +54,7 @@ class PeekingIterator(private val iterator: CharIterator) {
 }
 
 
-class Tokenizer(private var inputFormula: String) {
-
+class Tokenizer(private var inputFormula: String) : Tokenizer{
     private var iterator: PeekingIterator = PeekingIterator(this.inputFormula.iterator())
     private lateinit var currentToken: Token
 
@@ -148,7 +149,7 @@ class Tokenizer(private var inputFormula: String) {
         return currentToken
     }
 
-    fun tokenize(): List<Token> {
+    override fun tokenize(): List<Token> {
         val result: MutableList<Token> = mutableListOf<Token>()
         while (!isEnd()) {
             result.add(getToken())
@@ -158,4 +159,11 @@ class Tokenizer(private var inputFormula: String) {
         result.add(EofToken)
         return result
     }
+}
+
+class TokenizerFactory : TokenizerFactory {
+    override fun create(inputFormula: String): Tokenizer {
+        return impl.Tokenizer(inputFormula)
+    }
+
 }

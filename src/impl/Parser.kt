@@ -1,17 +1,21 @@
-import java.util.Queue
-import interfaces.ParserException
+package impl
+import interfaces.*
+import interfaces.Parser
+import interfaces.ParserFactory
 
-class Parser(private val tokenList: List<Token>) {
 
+import java.util.*
+import kotlin.collections.HashSet
+
+class Parser(private val tokenList: List<Token>, override val instructionGenerator: InstructionGenerator) :  Parser {
     private val it: ListIterator<Token> = tokenList.listIterator()
-    val instructionGenerator: InstructionGenerator = InstructionGenerator()
     private lateinit var currentToken: Token
     private val returnTokens = listOf(CloseBracketToken, CommaToken, EofToken)
-    val dependingOnCells = HashSet<String>()
+    override val dependingOnCells = HashSet<String>()
 
 
 
-    fun parseAndGetInstructions(): Queue<Instruction> {
+    override fun parseAndGetInstructions(): Queue<Instruction> {
         expressionRead()
         return instructionGenerator.outputQueue
     }
@@ -72,7 +76,7 @@ class Parser(private val tokenList: List<Token>) {
         acceptToken()
     }
 
-    fun expressionRead() {
+    override fun expressionRead() {
 
         instructionGenerator.addToken(OpenBracketToken)
         acceptToken()
@@ -103,6 +107,10 @@ class Parser(private val tokenList: List<Token>) {
         instructionGenerator.addToken(currentToken) // adding BinOperandToken
         expressionRead()
     }
+}
 
-
+class ParserFactory : ParserFactory {
+    override fun create(tokenList: List<Token>): Parser {
+        return Parser(tokenList, InstructionGenerator())
+    }
 }

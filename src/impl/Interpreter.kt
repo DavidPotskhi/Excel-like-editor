@@ -1,9 +1,18 @@
-import java.util.*
-import kotlin.math.max
+package impl
+
+import interfaces.Instruction
+import interfaces.Interpreter
 import interfaces.InterpreterException
+import interfaces.Table
+//import impl.Instruction
 
-class Interpreter(val table: Table) {
 
+import java.util.*
+import kotlin.Function
+import kotlin.Number
+import kotlin.math.max
+
+class Interpreter(val table: Table) : Interpreter {
     val functions = hashMapOf<String, (MutableList<Int>) -> Unit>(
         "+" to {
             if (it.size < 2) {
@@ -37,11 +46,11 @@ class Interpreter(val table: Table) {
         }
     )
 
-    fun eval(instruction: Instruction, stack: MutableList<Int>) {
+    override fun eval(instruction: Instruction, stack: MutableList<Int>) {
         when (instruction) {
-            is Number -> stack.add(instruction.number)
-            is CellReference -> stack.add(table.cells[instruction.cellReference]!!.value)
-            is Function -> {
+            is Instruction.Number -> stack.add(instruction.number)
+            is Instruction.CellReference -> stack.add(table.cells[instruction.cellReference]!!.value)
+            is Instruction.Function -> {
                 if (!functions.containsKey(instruction.functionName)) {
                     throw InterpreterException("Interpreter doesn't have function called: $instruction")
                 }
@@ -52,7 +61,7 @@ class Interpreter(val table: Table) {
         }
     }
 
-    fun executeInstructions(instructions: Queue<Instruction>): Int {
+    override fun executeInstructions(instructions: Queue<Instruction>): Int {
         val solveStack = mutableListOf<Int>()
         for (instruction in instructions) {
             eval(instruction, solveStack)
@@ -62,6 +71,5 @@ class Interpreter(val table: Table) {
         }
         return solveStack.removeLast()
     }
-
 
 }
