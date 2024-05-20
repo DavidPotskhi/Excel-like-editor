@@ -1,0 +1,322 @@
+import javax.swing.*
+import javax.swing.table.DefaultTableModel
+import javax.swing.table.TableCellEditor
+import java.awt.Component
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
+import java.awt.Dimension
+import javax.swing.event.CellEditorListener
+import javax.swing.event.ChangeEvent
+import javax.swing.plaf.basic.BasicTreeUI.CellEditorHandler
+
+
+class TableGUI {
+
+    val internalTable: Table = Table(this)
+
+    class RowHeaderTableModel(
+        private val rowHeaders: Array<String>,
+        private val data: Array<Array<String>>,
+        columnNames: Array<String>
+    ) : DefaultTableModel(data, columnNames) {
+        override fun getValueAt(row: Int, column: Int): Any {
+            return if (column == 0) rowHeaders[row] else super.getValueAt(row, column - 1)
+        }
+
+        override fun setValueAt(aValue: Any, row: Int, column: Int) {
+            if (column != 0) {
+                super.setValueAt(aValue, row, column - 1)
+            }
+        }
+
+        override fun isCellEditable(row: Int, column: Int): Boolean {
+            return column != 0 && super.isCellEditable(row, column - 1)
+        }
+
+        override fun getColumnCount(): Int {
+            return super.getColumnCount() + 1
+        }
+
+        override fun getColumnName(column: Int): String {
+            return if (column == 0) "Row" else super.getColumnName(column - 1)
+        }
+    }
+
+
+    /*
+//    class CustomCellEditor(private val tableModel: RowHeaderTableModel, val internalTable: Table) : AbstractCellEditor(), TableCellEditor,
+//        KeyListener {
+        private val textField = JTextField()
+        private var row: Int = -1
+        private var column: Int = -1
+        private var lastRow: Int = -1
+        private var lastColumn: Int = -1
+
+        init {
+            textField.addKeyListener(this)
+        }
+
+        override fun stopCellEditing(): Boolean {
+            println("AHUET' mojno s etim ebanim swingom")
+            println(row)
+            println(column)
+            println(lastRow)
+            println(lastColumn)
+            if (row != lastRow || column != lastColumn) {
+                // Trigger action only on cell switch
+                handleCellEdit()
+            }
+            lastRow = row
+            lastColumn = column
+            return super.stopCellEditing()
+        }
+
+        private fun handleCellEdit() {
+            if (row != -1 && column != -1) {
+                val rowName = tableModel.getValueAt(row, 0).toString() // Get the row name
+                val columnName = tableModel.getColumnName(column) // Get the column name
+                println("Entered: ${textField.text} at $rowName, $columnName")
+                internalTable.modifyCell(rowName + columnName, textField.text)
+                textField.text = internalTable.cells[rowName + columnName]?.value?.toString() ?: ""
+            }
+        }
+
+        override fun getCellEditorValue(): Any {
+            return textField.text
+        }
+
+        override fun getTableCellEditorComponent(
+            table: JTable?,
+            value: Any?,
+            isSelected: Boolean,
+            row: Int,
+            column: Int
+        ): Component {
+            this.row = row
+            this.column = column
+            textField.text = value as? String
+            return textField
+        }
+
+        override fun keyPressed(e: KeyEvent?) {
+            // Not used
+        }
+
+        override fun keyReleased(e: KeyEvent?) {
+            // Not used
+        }
+
+        override fun keyTyped(e: KeyEvent?) {
+            // Not used
+        }
+    }
+
+     */
+
+    class CustomCellEditor(private val tableModel: RowHeaderTableModel, val internalTable: Table) : AbstractCellEditor(), TableCellEditor, KeyListener {
+        private val textField = JTextField()
+        private var currentRow: Int = -1
+        private var currentColumn: Int = -1
+
+        init {
+            textField.addKeyListener(this)
+        }
+
+        override fun getTableCellEditorComponent(
+            table: JTable, value: Any?, isSelected: Boolean, row: Int, column: Int
+        ): Component {
+//            textField.text = value?.toString() ?: ""
+            textField.text = internalTable.cells["${'A' + row}$column"]?.formula ?: ""
+            currentRow = row
+            currentColumn = column
+
+            val l = object : CellEditorListener {
+                override fun editingStopped(e: ChangeEvent?) {
+                    println("Editing stopped: $currentRow, $currentColumn")
+                    val rowName = tableModel.getValueAt(currentRow, 0).toString() // Get the row name
+                    val columnName = tableModel.getColumnName(currentColumn) // Get the column name
+                    try {
+                        println("Entered: ${textField.text} at $rowName, $columnName")
+                        internalTable.modifyCell(rowName + columnName, textField.text)
+                    } catch (e: RuntimeException) {
+//                        cancelCellEditing()
+                        if (!internalTable.cells.containsKey(rowName + columnName)) {
+                            textField.text = ""
+                        }
+
+                    }
+                    println(internalTable.cells[rowName + columnName])
+                    println(textField.text)
+                    val cell = internalTable.cells[rowName + columnName]
+                    if (cell != null) {
+                        textField.text = cell.formula
+                    } else {
+                        textField.text = ""
+                    }
+                    tableModel.fireTableDataChanged()
+//                    textField.text = internalTable.cells[rowName + columnName]?.formula
+                }
+
+                override fun editingCanceled(e: ChangeEvent?) {}
+            }
+            addCellEditorListener(l)
+            return textField
+        }
+
+        override fun getCellEditorValue(): Any {
+            return textField.text
+        }
+
+        // KeyListener methods
+        override fun keyPressed(e: KeyEvent) {
+            println("keyPressed ${e.keyCode}")
+            if (e.keyCode == KeyEvent.VK_ENTER) {
+                stopCellEditing()  // Finish editing on Enter key press \n
+            } else  {
+                // If any other key is pressed, do nothing
+                // To prevent changes, you can call cancelCellEditing
+                //cancelCellEditing()  // Uncomment if you want to discard changes
+            }
+        }
+
+
+//
+//        val rowName = tableModel.getValueAt(row, 0).toString() // Get the row name
+//        val columnName = tableModel.getColumnName(column) // Get the column name
+//        println("Entered: ${textField.text} at $rowName, $columnName")
+//        internalTable.modifyCell(rowName + columnName, textField.text)
+//        textField.text = internalTable.cells[rowName + columnName]?.value?.toString() ?: ""
+        override fun keyReleased(e: KeyEvent) {
+
+        }
+
+        override fun keyTyped(e: KeyEvent) {
+            // No action needed
+        }
+
+        override fun isCellEditable(event: java.util.EventObject): Boolean {
+            // Allow editing only on mouse click
+            if (event is java.awt.event.MouseEvent) {
+                return event.clickCount == 1
+            }
+            return false
+        }
+
+        override fun shouldSelectCell(event: java.util.EventObject): Boolean {
+            return true
+        }
+
+        override fun stopCellEditing(): Boolean {
+            fireEditingStopped()  // Notify the table that editing has stopped
+            return true
+        }
+
+        override fun cancelCellEditing() {
+            fireEditingCanceled()  // Notify the table that editing has been canceled
+        }
+
+        fun getCurrentRow(): Int {
+            return currentRow
+        }
+
+        fun getCurrentColumn(): Int {
+            return currentColumn
+        }
+    }
+
+    lateinit var tableModel: RowHeaderTableModel
+
+    fun setValueAt(cellRef: String, value: Int) {
+        val row: Int = cellRef.first() - 'A'
+        val column: Int = cellRef.substring(1).toInt()
+        tableModel.setValueAt(value.toString(), row, column)
+        tableModel.fireTableDataChanged()
+    }
+
+    fun createAndShowGUI() {
+        // Create the frame
+        val frame = JFrame("Kotlin Spreadsheet with Row Headers and Custom Cell Editor")
+        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        frame.setSize(800, 600)
+
+        // Create the data and column names
+        val rowData = Array(16) { Array(10) { "" } } // 20 rows, 10 columns
+        val columnNames = Array(10) { "${it + 1}" }
+        val rowHeaders = arrayOf<String>("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P")
+
+        // Create the custom table model
+        tableModel = RowHeaderTableModel(rowHeaders, rowData, columnNames)
+        val table = JTable(tableModel)
+
+        // Set the custom cell editor for all columns except the row header
+        for (i in 1 until table.columnCount) {
+            table.getColumnModel().getColumn(i).cellEditor = CustomCellEditor(tableModel, internalTable)
+        }
+
+        // Adjust the table's appearance
+        table.autoResizeMode = JTable.AUTO_RESIZE_OFF
+        table.columnModel.getColumn(0).preferredWidth = 50
+
+        // Create scroll pane for the table
+        val scrollPane = JScrollPane(table)
+        scrollPane.preferredSize = Dimension(780, 550)
+
+        // Create a menu bar
+        val menuBar = JMenuBar()
+        val fileMenu = JMenu("File")
+        val newMenuItem = JMenuItem("New")
+        val openMenuItem = JMenuItem("Open")
+        val saveMenuItem = JMenuItem("Save")
+        fileMenu.add(newMenuItem)
+        fileMenu.add(openMenuItem)
+        fileMenu.add(saveMenuItem)
+        menuBar.add(fileMenu)
+        frame.jMenuBar = menuBar
+
+        // Create a toolbar
+        val toolBar = JToolBar()
+        val newButton = JButton("New")
+        val openButton = JButton("Open")
+        val saveButton = JButton("Save")
+        toolBar.add(newButton)
+        toolBar.add(openButton)
+        toolBar.add(saveButton)
+
+        // Add toolbar and table to the frame
+        frame.add(toolBar, java.awt.BorderLayout.NORTH)
+        frame.add(scrollPane, java.awt.BorderLayout.CENTER)
+
+        // Define actions for buttons and menu items
+        val newAction = {
+            for (row in 0..<tableModel.rowCount) {
+                for (col in 1..<tableModel.columnCount + 1) { // skip the row header column
+                    tableModel.setValueAt("", row, col)
+                }
+            }
+        }
+        newButton.addActionListener { newAction() }
+        newMenuItem.addActionListener { newAction() }
+
+        openButton.addActionListener {
+            // Implement open file functionality here
+        }
+        openMenuItem.addActionListener {
+            // Implement open file functionality here
+        }
+
+        saveButton.addActionListener {
+            // Implement save file functionality here
+        }
+        saveMenuItem.addActionListener {
+            // Implement save file functionality here
+        }
+
+        // Display the frame
+        frame.pack()
+        frame.isVisible = true
+    }
+}
+
+
+
+

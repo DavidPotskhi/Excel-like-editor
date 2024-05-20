@@ -56,6 +56,9 @@ class Interpreter(val table: Table) {
         for (instruction in instructions) {
             eval(instruction, solveStack)
         }
+        if (solveStack.size > 1) {
+            throw InterpreterException("More that 1 instruction is left on the solving stack, you might've added extra arguments")
+        }
         return solveStack.removeLast()
     }
 

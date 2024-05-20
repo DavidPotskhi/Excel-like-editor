@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f81c4f5-99c2-4636-be1d-e62281289fac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Table.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TableGUI.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Environment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GlobalEnvironment.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interpreter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpreter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyExceptions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyExceptions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Table.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Table.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +34,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -43,36 +46,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.ParserTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ParserTest.shouldNotThrowParserException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ParserTest.shouldThrowParserException.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.TokenizerTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TokenizerTest.expectTokenizerExceptionsTests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TokenizerTest.shouldReturnCorrectResult (1).executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TokenizerTest.shouldReturnCorrectResult.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TokenizerTest.simpleTest.executor&quot;: &quot;Run&quot;,
-    &quot;Kotlin.MainKt.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/david/Java_IntelliJ_Projects/Excel/src/Main.kt&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.ParserTest.executor": "Run",
+    "JUnit.ParserTest.shouldNotThrowParserException.executor": "Run",
+    "JUnit.ParserTest.shouldThrowParserException.executor": "Debug",
+    "JUnit.TokenizerTest.executor": "Run",
+    "JUnit.TokenizerTest.expectTokenizerExceptionsTests.executor": "Run",
+    "JUnit.TokenizerTest.shouldReturnCorrectResult (1).executor": "Run",
+    "JUnit.TokenizerTest.shouldReturnCorrectResult.executor": "Run",
+    "JUnit.TokenizerTest.simpleTest.executor": "Run",
+    "Kotlin.MainKt.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/home/david/Java_IntelliJ_Projects/Excel/src/Main.kt",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -160,7 +163,10 @@
       <workItem from="1716032903076" duration="2598000" />
       <workItem from="1716035889704" duration="9275000" />
       <workItem from="1716120898029" duration="1917000" />
-      <workItem from="1716132171846" duration="3083000" />
+      <workItem from="1716132171846" duration="5482000" />
+      <workItem from="1716138934174" duration="14779000" />
+      <workItem from="1716161274913" duration="3156000" />
+      <workItem from="1716209529634" duration="20231000" />
     </task>
     <servers />
   </component>
@@ -195,12 +201,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="kotlin-function">
           <url>file://$PROJECT_DIR$/src/Main.kt</url>
-          <line>2</line>
+          <line>8</line>
           <properties method="main">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/TableGUI.kt</url>
+          <line>139</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
