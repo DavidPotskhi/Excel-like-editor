@@ -6,22 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="2f81c4f5-99c2-4636-be1d-e62281289fac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Instruction.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InstructionGenerator.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpreter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyExceptions.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Table.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TableGUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TableGUI.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tokenizer.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/InstructionGenerator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/InstructionGenerator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/Interpreter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/Interpreter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/impl/Table.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/Table.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/impl/Tokenizer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/Tokenizer.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/Parser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Parser.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/ParserTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/test/ParserTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/TokenizerTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/test/TokenizerTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +48,7 @@
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.ParserTest.executor": "Run",
     "JUnit.ParserTest.shouldNotThrowParserException.executor": "Run",
-    "JUnit.ParserTest.shouldThrowParserException.executor": "Debug",
+    "JUnit.ParserTest.shouldThrowParserException.executor": "Run",
     "JUnit.TokenizerTest.executor": "Run",
     "JUnit.TokenizerTest.expectTokenizerExceptionsTests.executor": "Run",
     "JUnit.TokenizerTest.shouldReturnCorrectResult (1).executor": "Run",
@@ -96,7 +82,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Kotlin.MainKt">
+  <component name="RunManager" selected="JUnit.ParserTest">
     <configuration name="ParserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Excel" />
       <option name="PACKAGE_NAME" value="" />
@@ -144,11 +130,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.MainKt" />
         <item itemvalue="JUnit.ParserTest" />
         <item itemvalue="JUnit.TokenizerTest" />
-        <item itemvalue="JUnit.ParserTest.shouldNotThrowParserException" />
         <item itemvalue="JUnit.ParserTest.shouldThrowParserException" />
+        <item itemvalue="JUnit.ParserTest.shouldNotThrowParserException" />
+        <item itemvalue="Kotlin.MainKt" />
       </list>
     </recent_temporary>
   </component>
@@ -178,7 +164,8 @@
       <workItem from="1716132171846" duration="5482000" />
       <workItem from="1716138934174" duration="14779000" />
       <workItem from="1716161274913" duration="3156000" />
-      <workItem from="1716209529634" duration="29327000" />
+      <workItem from="1716209529634" duration="29358000" />
+      <workItem from="1716243506589" duration="1015000" />
     </task>
     <servers />
   </component>
@@ -196,7 +183,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="makingInterfaces" />
                       </list>
                     </value>
                   </entry>
@@ -207,5 +194,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/test/ParserTest.kt</url>
+          <line>19</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

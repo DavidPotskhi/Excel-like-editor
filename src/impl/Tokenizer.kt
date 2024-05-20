@@ -150,6 +150,10 @@ class Tokenizer(private var inputFormula: String) : Tokenizer{
     }
 
     override fun tokenize(): List<Token> {
+        if (inputFormula.isEmpty()) {
+            return listOf(EofToken)
+        }
+
         val result: MutableList<Token> = mutableListOf<Token>()
         while (!isEnd()) {
             result.add(getToken())
