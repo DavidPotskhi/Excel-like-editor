@@ -1,3 +1,4 @@
+import impl.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -6,13 +7,16 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
+import interfaces.Token
+import interfaces.TokenizerException
+
 class TokenizerTest {
 
-    private val tokenList: MutableList<Token?> = mutableListOf<Token?>()
+    private val tokenList: MutableList<Token?> = mutableListOf()
 
     @BeforeEach
     fun setup() {
-        tokenList.clear();
+        tokenList.clear()
     }
 
 

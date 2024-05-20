@@ -8,8 +8,8 @@ class ParserException : RuntimeException {
 
 }
 interface Parser {
-    val dependingOnCells: HashSet<String> get
-    val instructionGenerator: InstructionGenerator get
+    val dependingOnCells: HashSet<String>
+    val instructionGenerator: InstructionGenerator
     fun parseAndGetInstructions(): Queue<Instruction>
     fun expressionRead()
 }

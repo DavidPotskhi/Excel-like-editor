@@ -5,13 +5,19 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
+import interfaces.ParserException
+import impl.Parser
+import impl.Tokenizer
+import impl.InstructionGenerator
+
+
 class ParserTest {
 
     @ParameterizedTest
     @MethodSource("testCasesForExceptions")
     fun shouldThrowParserException(input: String) {
         org.junit.jupiter.api.assertThrows<ParserException> {
-            Parser(Tokenizer(input).tokenize()).expressionRead()
+            Parser(Tokenizer(input).tokenize(), InstructionGenerator()).expressionRead()
         }
     }
 
@@ -19,7 +25,7 @@ class ParserTest {
     @MethodSource("testCasesNoExceptions")
     fun shouldNotThrowParserException(input: String) {
         org.junit.jupiter.api.assertDoesNotThrow {
-            Parser(Tokenizer(input).tokenize()).expressionRead()
+            Parser(Tokenizer(input).tokenize(), InstructionGenerator()).expressionRead()
         }
     }
 

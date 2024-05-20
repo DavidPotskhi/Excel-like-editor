@@ -74,7 +74,7 @@ class Tokenizer(private var inputFormula: String) : Tokenizer{
         while (iterator.hasNext() && (iterator.peek().isWhitespace() || iterator.peek() == '\n'
                     || iterator.peek() == '\t' || iterator.peek() == '\r')
         ) {
-            iterator.next();
+            iterator.next()
         }
 
         when {
@@ -141,7 +141,7 @@ class Tokenizer(private var inputFormula: String) : Tokenizer{
         while (iterator.hasNext() && (iterator.peek().isWhitespace() || iterator.peek() == '\n'
                     || iterator.peek() == '\t' || iterator.peek() == '\r')
         ) {
-            iterator.next();
+            iterator.next()
         }
     }
 
@@ -163,7 +163,7 @@ class Tokenizer(private var inputFormula: String) : Tokenizer{
 
 class TokenizerFactory : TokenizerFactory {
     override fun create(inputFormula: String): Tokenizer {
-        return impl.Tokenizer(inputFormula)
+        return Tokenizer(inputFormula)
     }
 
 }

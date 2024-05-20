@@ -4,12 +4,8 @@ import interfaces.Instruction
 import interfaces.Interpreter
 import interfaces.InterpreterException
 import interfaces.Table
-//import impl.Instruction
-
 
 import java.util.*
-import kotlin.Function
-import kotlin.Number
 import kotlin.math.max
 
 class Interpreter(val table: Table) : Interpreter {

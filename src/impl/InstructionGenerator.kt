@@ -5,7 +5,7 @@ import java.util.*
 import interfaces.Token
 import interfaces.Instruction
 
-class InstructionGenerator() :  InstructionGenerator {
+class InstructionGenerator :  InstructionGenerator {
     private val holdingStack: MutableList<Instruction> = mutableListOf<Instruction>()
     override val outputQueue: Queue<Instruction> = LinkedList<Instruction>()
 

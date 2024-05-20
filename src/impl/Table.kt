@@ -5,7 +5,6 @@ import TableGUI
 import interfaces.ParserFactory
 
 class Table(
-    val tableGUI: TableGUI,
     val tokenizerFactory: TokenizerFactory,
     val parserFactory: ParserFactory
 ) :  Table {
@@ -15,6 +14,8 @@ class Table(
     var outDependencies = hashMapOf<String, HashSet<String>>()
     var inDependencies = hashMapOf<String, HashSet<String>>()
     val interpreter: Interpreter = Interpreter(this)
+
+    lateinit var tableGUI: TableGUI
 
     fun  HashMap<String, HashSet<String>>.getOrCreate(key: String): HashSet<String> {
         this.getOrPut(key) { HashSet<String>() }
@@ -79,7 +80,7 @@ class Table(
         visited[currentCell] = State.Visited
 
         topologicalOrder.add(currentCell)
-        return false;
+        return false
     }
 
     enum class State {

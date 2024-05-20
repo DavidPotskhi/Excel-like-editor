@@ -5,25 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f81c4f5-99c2-4636-be1d-e62281289fac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/impl/Instruction.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/impl/InstructionGenerator.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/impl/Interpreter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/impl/Parser.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/impl/Table.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/impl/Tokenizer.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/Instruction.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/InstructionGenerator.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/Interpreter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/Parser.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/Table.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/Tokenizer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InstructionGenerator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/InstructionGenerator.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interpreter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interpreter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyExceptions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyExceptions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Table.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Table.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tokenizer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tokenizer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Instruction.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InstructionGenerator.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interpreter.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyExceptions.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Table.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TableGUI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/TableGUI.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tokenizer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/InstructionGenerator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/InstructionGenerator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/Interpreter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/Interpreter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/Table.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/Table.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/Tokenizer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/Tokenizer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/Parser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/Parser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ParserTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/test/ParserTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/TokenizerTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/test/TokenizerTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +46,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -78,7 +76,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "makingInterfaces",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -86,6 +84,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/home/david/Java_IntelliJ_Projects/Excel/src/Main.kt",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -97,7 +96,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TokenizerTest">
+  <component name="RunManager" selected="Kotlin.MainKt">
     <configuration name="ParserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Excel" />
       <option name="PACKAGE_NAME" value="" />
@@ -145,9 +144,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TokenizerTest" />
         <item itemvalue="Kotlin.MainKt" />
         <item itemvalue="JUnit.ParserTest" />
+        <item itemvalue="JUnit.TokenizerTest" />
         <item itemvalue="JUnit.ParserTest.shouldNotThrowParserException" />
         <item itemvalue="JUnit.ParserTest.shouldThrowParserException" />
       </list>
@@ -179,7 +178,7 @@
       <workItem from="1716132171846" duration="5482000" />
       <workItem from="1716138934174" duration="14779000" />
       <workItem from="1716161274913" duration="3156000" />
-      <workItem from="1716209529634" duration="26664000" />
+      <workItem from="1716209529634" duration="29327000" />
     </task>
     <servers />
   </component>
@@ -208,25 +207,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-function">
-          <url>file://$PROJECT_DIR$/src/Main.kt</url>
-          <line>2</line>
-          <properties method="main">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/TableGUI.kt</url>
-          <line>139</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

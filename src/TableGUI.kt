@@ -10,9 +10,7 @@ import javax.swing.event.ChangeEvent
 import javax.swing.plaf.basic.BasicTreeUI.CellEditorHandler
 
 
-class TableGUI {
-
-    val internalTable: Table = Table(this)
+class TableGUI(val internalTable: interfaces.Table) {
 
     class RowHeaderTableModel(
         private val rowHeaders: Array<String>,
@@ -43,7 +41,7 @@ class TableGUI {
     }
 
 
-    class CustomCellEditor(private val tableModel: RowHeaderTableModel, val internalTable: Table) : AbstractCellEditor(), TableCellEditor, KeyListener {
+    class CustomCellEditor(private val tableModel: RowHeaderTableModel, val internalTable: interfaces.Table) : AbstractCellEditor(), TableCellEditor, KeyListener {
         private val textField = JTextField()
         private var currentRow: Int = -1
         private var currentColumn: Int = -1
@@ -109,13 +107,6 @@ class TableGUI {
             }
         }
 
-
-//
-//        val rowName = tableModel.getValueAt(row, 0).toString() // Get the row name
-//        val columnName = tableModel.getColumnName(column) // Get the column name
-//        println("Entered: ${textField.text} at $rowName, $columnName")
-//        internalTable.modifyCell(rowName + columnName, textField.text)
-//        textField.text = internalTable.cells[rowName + columnName]?.value?.toString() ?: ""
         override fun keyReleased(e: KeyEvent) {
 
         }
@@ -180,7 +171,7 @@ class TableGUI {
 
         // Set the custom cell editor for all columns except the row header
         for (i in 1 until table.columnCount) {
-            table.getColumnModel().getColumn(i).cellEditor = CustomCellEditor(tableModel, internalTable)
+            table.columnModel.getColumn(i).cellEditor = CustomCellEditor(tableModel, internalTable)
         }
 
         // Adjust the table's appearance
@@ -191,14 +182,8 @@ class TableGUI {
         val scrollPane = JScrollPane(table)
         scrollPane.preferredSize = Dimension(780, 550)
 
+        frame.add(scrollPane, java.awt.BorderLayout.CENTER)
 
-
-
-
-
-
-
-        // Display the frame
         frame.pack()
         frame.isVisible = true
     }
