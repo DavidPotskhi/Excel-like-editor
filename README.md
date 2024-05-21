@@ -13,3 +13,9 @@
   * Click on the cell, edit it and press enter (or click to another cell)
 * Where you can see error messages:
   * All error messages are printed to the standard output
+* Functions and operator list:
+  * There is support of only integer numbers in editor
+  * The +, - and * binary operators are supported
+  * unary minus operator is supported
+  * the max(a,b) function is supported, it takes exactly two arguments and return the maximum of a and b
+  * the inv(a) function is supported, it takes exactly one argument and returns the bitwise inverted a 
