@@ -11,8 +11,8 @@ class Table(
     data class Cell(override var formula: String = "", override var value: Int = 0): Table.Cell
 
     override val cells: HashMap<String, Table.Cell> = hashMapOf()
-    var outDependencies = hashMapOf<String, HashSet<String>>()
-    var inDependencies = hashMapOf<String, HashSet<String>>()
+    var outDependencies = hashMapOf<String, HashSet<String>>() // outDependencies[cellRef] - set of cells that will be affected by the change of value in cellRef
+    var inDependencies = hashMapOf<String, HashSet<String>>() // outDependencies[cellRef] - set of cell that cellRef depends on
     val interpreter: Interpreter = Interpreter(this)
 
     lateinit var tableGUI: TableGUI
@@ -44,9 +44,6 @@ class Table(
 
 
     fun makeCellEmpty(cellRef: String) {
-//        try {
-//
-
         if (!cells.containsKey(cellRef)) {
             return
         }
@@ -61,9 +58,6 @@ class Table(
             outDependencies.getOrCreate(cell).remove(cellRef)
         }
         cells.remove(cellRef)
-//        } catch (e: RuntimeException) {
-//            println(e.javaClass.toString().substring(6) + ":  " + e.message)
-//        }
     }
 
     fun dfs(currentCell: String, topologicalOrder: MutableList<String>, visited: HashMap<String, State>): Boolean {
@@ -106,29 +100,25 @@ class Table(
             val parser = parserFactory.create(tokenizerFactory.create(cells.getOrCreate(cellRef).formula).tokenize())
             parser.expressionRead()
             updateDependencies(parser.dependingOnCells, cellRef)
-            println("Cycle detected: $cellRef")
+            println("Cyclic reference detected in $cellRef")
         } else {
             cells.getOrCreate(cellRef).formula = formula
             for (cell in topologicalOrder.reversed()) {
                 val parser = parserFactory.create(tokenizerFactory.create(cells.getOrCreate(cell).formula).tokenize())
                 val instructions = parser.parseAndGetInstructions()
                 cells.getOrCreate(cell).value = interpreter.executeInstructions(instructions)
-                println("Updating $cell as dep of $cellRef to ${cells.getOrCreate(cell).value}")
+                //println("Updating $cell as dep of $cellRef to ${cells.getOrCreate(cell).value}")
                 tableGUI.setValueAt(cell, cells.getOrCreate(cell).value)
             }
         }
     }
 
     fun modifyCellWithNonEmptyFormula(cellRef: String, formula: String) {
-//        try {
         val parser = parserFactory.create(tokenizerFactory.create(formula).tokenize())
         parser.expressionRead()
         Interpreter(this).executeInstructions(parser.instructionGenerator.outputQueue)
         updateDependencies(parser.dependingOnCells, cellRef)
         makeTopologicalTraversal(cellRef, formula)
-//        } catch (e: RuntimeException) {
-//            println(e.javaClass.toString().substring(6) + ":  " + e.message)
-//        }
     }
 
     override fun modifyCell(cellRef: String, formula: String) {

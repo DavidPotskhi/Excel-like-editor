@@ -53,7 +53,6 @@ class TableGUI(val internalTable: interfaces.Table) {
         override fun getTableCellEditorComponent(
             table: JTable, value: Any?, isSelected: Boolean, row: Int, column: Int
         ): Component {
-//            textField.text = value?.toString() ?: ""
             textField.text = internalTable.cells["${'A' + row}$column"]?.formula ?: ""
             currentRow = row
             currentColumn = column
@@ -67,14 +66,12 @@ class TableGUI(val internalTable: interfaces.Table) {
                         println("Entered: ${textField.text} at $rowName, $columnName")
                         internalTable.modifyCell(rowName + columnName, textField.text)
                     } catch (e: RuntimeException) {
-//                        cancelCellEditing()
+                        println(e.message)
                         if (!internalTable.cells.containsKey(rowName + columnName)) {
                             textField.text = ""
                         }
 
                     }
-                    println(internalTable.cells[rowName + columnName])
-                    println(textField.text)
                     val cell = internalTable.cells[rowName + columnName]
                     if (cell != null) {
                         textField.text = cell.formula
@@ -82,7 +79,6 @@ class TableGUI(val internalTable: interfaces.Table) {
                         textField.text = ""
                     }
                     tableModel.fireTableDataChanged()
-//                    textField.text = internalTable.cells[rowName + columnName]?.formula
                 }
 
                 override fun editingCanceled(e: ChangeEvent?) {}
@@ -97,13 +93,8 @@ class TableGUI(val internalTable: interfaces.Table) {
 
         // KeyListener methods
         override fun keyPressed(e: KeyEvent) {
-            println("keyPressed ${e.keyCode}")
             if (e.keyCode == KeyEvent.VK_ENTER) {
                 stopCellEditing()  // Finish editing on Enter key press \n
-            } else  {
-                // If any other key is pressed, do nothing
-                // To prevent changes, you can call cancelCellEditing
-                //cancelCellEditing()  // Uncomment if you want to discard changes
             }
         }
 
@@ -156,12 +147,12 @@ class TableGUI(val internalTable: interfaces.Table) {
 
     fun createAndShowGUI() {
         // Create the frame
-        val frame = JFrame("Kotlin Spreadsheet with Row Headers and Custom Cell Editor")
+        val frame = JFrame("Excel-like-editor")
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         frame.setSize(800, 600)
 
         // Create the data and column names
-        val rowData = Array(16) { Array(10) { "" } } // 20 rows, 10 columns
+        val rowData = Array(16) { Array(10) { "" } }
         val columnNames = Array(10) { "${it + 1}" }
         val rowHeaders = arrayOf<String>("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P")
 
